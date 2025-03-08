@@ -1,0 +1,63 @@
+
+  
+  /* Ensure no horizontal scroll on the body or parent */
+  body, html {
+    overflow-x: hidden;
+  }
+
+
+  .image-collage {
+    position: relative;
+    height: 400px; /* Adjust height as needed */
+  }
+  
+  .collage-image {
+    position: absolute;
+    /* width: 50%; */
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  
+  .collage-image.top-left {
+    top: 0;
+    left: 0;
+  }
+  
+  .collage-image.top-right {
+    top: 0;
+    right: 0;
+  }
+  
+  .collage-image.bottom-left {
+    bottom: 0;
+    left: 0;
+  }
+  
+  .collage-image.bottom-right {
+    bottom: 0;
+    right: 0;
+  }
+  
+  /* Decorative Elements (e.g., sparkles) */
+  .decorative-elements {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 20px;
+    height: 20px;
+    background: url('/sparkle-icon.png') no-repeat; /* Replace with your sparkle image */
+    opacity: 0.5;
+  }
+  
+  /* Optional: Add a curve or wave effect if desired */
+  .decorative-elements::before {
+    content: "";
+    position: absolute;
+    bottom: -50px;
+    left: 0;
+    width: 200px;
+    height: 100px;
+    background: url('/wave-curve.png') no-repeat; /* Replace with your curve image */
+    opacity: 0.2;
+  }
