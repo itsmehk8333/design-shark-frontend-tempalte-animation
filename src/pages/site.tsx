@@ -3,19 +3,13 @@ import { Box, Typography, Button, Container, Grid, LinearProgress } from "@mui/m
 import { gsap } from "gsap";
 import image01 from "../assets/image01.png"
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-// import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
+
 import "./site.css"
-// import NorthEastIcon from "@mui/icons-material/NorthEast";
+
 import ArrowOutwardTwoToneIcon from '@mui/icons-material/ArrowOutwardTwoTone';
 import teamImage from "../assets/team_image.png"
 gsap.registerPlugin(ScrollTrigger);
-type SectionProps = {
-  title: string;
-  description: string;
-};
-// CSS for the slide-left animation
-// CSS for the slide-left animation
-// CSS for the slide-left animation
+
 const stylesTwo = `
   @keyframes slideLeft {
     0% {
@@ -56,12 +50,12 @@ const AnimatedButton: React.FC = () => {
           if (element) {
             const scrollingDown = entry.boundingClientRect.top < 8;
             if (entry.isIntersecting) {
-              // Button is in view (scrolling back up)
+        
               element.classList.remove('disappear');
               element.classList.add('appear');
               console.log('Appearing: Sliding from left to original');
             } else if (scrollingDown) {
-              // Button is out of view above (scrolling down)
+            
               element.classList.remove('appear');
               element.classList.add('disappear');
               console.log('Disappearing: Sliding from original to left');
@@ -69,7 +63,7 @@ const AnimatedButton: React.FC = () => {
           }
         });
       },
-      { threshold: 0.5 } // Trigger when 50% of the element is visible
+      { threshold: 0.5 }
     );
 
     if (buttonRef.current) {
@@ -85,7 +79,6 @@ const AnimatedButton: React.FC = () => {
 
   return (
     <>
-      {/* Inject CSS styles */}
       <style>{stylesTwo}</style>
 
       <Box ref={buttonRef} sx={{ mt: 3, position: 'relative', marginLeft: '150px' }}>
@@ -139,7 +132,7 @@ const HeroSection: React.FC = () => {
     }
     if (badgeRef.current) {
       gsap.fromTo(badgeRef.current, { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 1, delay: 0.5 });
-      // Continuous rotation animation for badge
+     
       const rotateBadge = gsap.to(badgeRef.current, {
         rotation: 360,
         duration: 10,
@@ -159,18 +152,18 @@ const HeroSection: React.FC = () => {
           const element = entry.target.querySelector('.animate-slide-right');
           if (element) {
             if (entry.isIntersecting) {
-              // When element comes into view, make it appear (slide from right to left)
+      
               element.classList.remove('disappear');
               element.classList.add('appear');
             } else {
-              // When element leaves view, make it disappear (slide left to right)
+             
               element.classList.remove('appear');
               element.classList.add('disappear');
             }
           }
         });
       },
-      { threshold: 0.5 } // Trigger when 50% of the element is visible
+      { threshold: 0.5 } 
     );
 
     if (buttonRef.current) {
@@ -207,7 +200,7 @@ const HeroSection: React.FC = () => {
               lineHeight: "1",
               textTransform: "uppercase",
               letterSpacing: "0.1rem",
-              marginBottom: "1rem", // Adjusted spacing
+              marginBottom: "1rem", 
             }}
           >
             Driving Results <br />
@@ -218,7 +211,7 @@ const HeroSection: React.FC = () => {
                 fontStyle: "italic",
                 textDecoration: "underline",
                 color: "#B0B0B0",
-                fontSize: "4rem", // Adjusted to match image
+                fontSize: "4rem", 
               }}
             >
               Creative Digital
@@ -229,21 +222,21 @@ const HeroSection: React.FC = () => {
             sx={{
               mt: 2,
               maxWidth: "500px",
-              marginLeft: "0", // Removed auto margin to match image alignment
+              marginLeft: "0", 
               opacity: 0.8,
               fontSize: "1rem",
               lineHeight: "1.5",
-              marginBottom: "3rem", // Increased spacing to match image
+              marginBottom: "3rem", 
             }}
           >
             Our team of experts is dedicated to helping you achieve your digital goals. From website design and development to SEO, PPC advertising, and social media marketing.
           </Typography>
-          {/* Circular Button with Curved Text */}
+         
         <AnimatedButton />
         
         </Box>
       </Container>
-      {/* Circular Badge with Two "PROJECT SHOWCASE" Texts */}
+     
       <Box
         ref={badgeRef}
         sx={{
@@ -331,7 +324,6 @@ const HeroSection: React.FC = () => {
           />
         </Box>
       </Box>
-      {/* Decorative Circle */}
       <Box
         sx={{
           position: "absolute",
@@ -358,18 +350,18 @@ const ImageSection: React.FC = () => {
         imageRef.current,
         {
           opacity: 0,
-          x: "100%", // Start off-screen to the right
-          ease: "power3.out", // Smooth easing for a natural feel
+          x: "100%", 
+          ease: "power3.out", 
         },
         {
           opacity: 1,
-          x: 0, // End at natural position
-          duration: 1.5, // Adjusted duration for a polished effect
+          x: 0, 
+          duration: 1.5, 
           scrollTrigger: {
             trigger: imageRef.current,
-            start: "top 80%", // Start animation when top of image is 80% from top of viewport
-            end: "top 20%", // End animation when top of image is 20% from top of viewport
-            toggleActions: "play none none reverse", // Play on enter, reverse on leave
+            start: "top 80%", 
+            end: "top 20%", 
+            toggleActions: "play none none reverse", 
           },
         }
       );
@@ -487,7 +479,7 @@ const AboutSection: React.FC = () => {
           }
         });
       },
-      { threshold: 0.2 } // Trigger when 20% of the section is visible
+      { threshold: 0.2 } 
     );
 
     if (sectionRef.current) {
@@ -503,7 +495,7 @@ const AboutSection: React.FC = () => {
 
   return (
     <>
-      {/* Inject CSS styles */}
+      
       <style>{styles}</style>
 
       <Box
@@ -512,11 +504,11 @@ const AboutSection: React.FC = () => {
       >
         <Container>
           <Grid container spacing={3} alignItems="center">
-            {/* Left Grid: Image Collage */}
+          
             <Grid item xs={12} md={6} sx={{ overflow: 'hidden', position: 'relative' }}>
               <Box className="image-collage">
                 <img
-                  src={teamImage} // Replace with your actual image source
+                  src={teamImage} 
                   width={500}
                   alt="Team member 1"
                   className="collage-image top-left"
@@ -524,7 +516,7 @@ const AboutSection: React.FC = () => {
               </Box>
             </Grid>
 
-            {/* Right Grid: Text Content */}
+           
             <Grid item xs={12} md={6} sx={{ color: '#000' }}>
               <Typography
                 variant="h4"
@@ -540,7 +532,7 @@ const AboutSection: React.FC = () => {
                 Founded in 2012, we have built a reputation for excellence and innovation in the digital marketing space. We pride ourselves on our client-centric approach, partnering with businesses of all sizes and industries to develop customized strategies that meet their unique needs and goals.
               </Typography>
               <Box sx={{ mt: 4 }}>
-                {/* Branding Progress */}
+              
                 <LinearProgress
                   variant="determinate"
                   value={90}
@@ -568,7 +560,6 @@ const AboutSection: React.FC = () => {
                   </Typography>
                 </Box>
 
-                {/* Business Progress */}
                 <LinearProgress
                   variant="determinate"
                   value={85}
@@ -598,7 +589,7 @@ const AboutSection: React.FC = () => {
             </Grid>
           </Grid>
 
-          {/* Optional: Add decorative elements like sparkles or curves */}
+         
           <Box className="decorative-elements" />
         </Container>
       </Box>
@@ -618,7 +609,7 @@ const StrategySection: React.FC = () => {
           }
         });
       },
-      { threshold: 0.2 } // Trigger when 20% of the section is visible
+      { threshold: 0.2 } 
     );
 
     if (sectionRef.current) {
@@ -634,7 +625,7 @@ const StrategySection: React.FC = () => {
 
   return (
     <>
-      {/* Inject CSS styles */}
+
       <style>{styles}</style>
 
       <Box
@@ -650,7 +641,7 @@ const StrategySection: React.FC = () => {
       >
         <Container sx={{ display: 'flex', alignItems: 'center' }}>
           <Box sx={{ margin: '0 30px' }}>
-            {/* Our Approach Label */}
+            
             <Typography
               className="animate-pop-up"
               sx={{
@@ -664,7 +655,7 @@ const StrategySection: React.FC = () => {
               Our Approach
             </Typography>
 
-            {/* Title */}
+       
             <Typography
               variant="h2"
               className="animate-pop-up"
@@ -680,7 +671,7 @@ const StrategySection: React.FC = () => {
               EXPERTISE IN STRATEGY, DESIGN AND DEVELOPMENT
             </Typography>
 
-            {/* Subtitle */}
+          
             <Typography
               className="animate-pop-up"
               sx={{
@@ -729,9 +720,9 @@ const StrategySection: React.FC = () => {
             </Box>
           </Box>
 
-          {/* Three Columns */}
+        
           <div>
-            {/* Discovery */}
+          
             <Box
               sx={{
                 background: 'rgba(255, 255, 255, 0.1)',
@@ -743,7 +734,7 @@ const StrategySection: React.FC = () => {
             >
               <Box
                 component="img"
-                src={image01} // Replace with your actual image
+                src={image01} 
                 sx={{
                   position: 'absolute',
                   top: 0,
@@ -792,8 +783,6 @@ const StrategySection: React.FC = () => {
                 </Typography>
               </Box>
             </Box>
-
-            {/* Strategy */}
             <Box
               sx={{
                 background: 'rgba(255, 255, 255, 0.1)',
@@ -831,7 +820,7 @@ const StrategySection: React.FC = () => {
               </Typography>
             </Box>
 
-            {/* Development */}
+          
             <Box
               sx={{
                 background: 'rgba(255, 255, 255, 0.1)',
