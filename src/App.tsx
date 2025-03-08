@@ -1,5 +1,4 @@
-import React from 'react'
-import HomePage from './pages/site'
+  import HomePage from './pages/site'
 
 function App() {
   

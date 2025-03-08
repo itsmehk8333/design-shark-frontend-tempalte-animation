@@ -1,13 +1,12 @@
 import React, { useEffect, useRef } from "react";
 import { Box, Typography, Button, Container, Grid, LinearProgress } from "@mui/material";
 import { gsap } from "gsap";
-import image01 from "../assets/image01.png"
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import image01 from "../assets/image01.png";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import "./site.css";
+import ArrowOutwardTwoToneIcon from "@mui/icons-material/ArrowOutwardTwoTone";
+import teamImage from "../assets/team_image.png";
 
-import "./site.css"
-
-import ArrowOutwardTwoToneIcon from '@mui/icons-material/ArrowOutwardTwoTone';
-import teamImage from "../assets/team_image.png"
 gsap.registerPlugin(ScrollTrigger);
 
 const stylesTwo = `
@@ -46,19 +45,17 @@ const AnimatedButton: React.FC = () => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          const element = entry.target.querySelector('.animate-slide-left');
+          const element = entry.target.querySelector(".animate-slide-left");
           if (element) {
             const scrollingDown = entry.boundingClientRect.top < 8;
             if (entry.isIntersecting) {
-        
-              element.classList.remove('disappear');
-              element.classList.add('appear');
-              console.log('Appearing: Sliding from left to original');
+              element.classList.remove("disappear");
+              element.classList.add("appear");
+              console.log("Appearing: Sliding from left to original");
             } else if (scrollingDown) {
-            
-              element.classList.remove('appear');
-              element.classList.add('disappear');
-              console.log('Disappearing: Sliding from original to left');
+              element.classList.remove("appear");
+              element.classList.add("disappear");
+              console.log("Disappearing: Sliding from original to left");
             }
           }
         });
@@ -81,39 +78,39 @@ const AnimatedButton: React.FC = () => {
     <>
       <style>{stylesTwo}</style>
 
-      <Box ref={buttonRef} sx={{ mt: 3, position: 'relative', marginLeft: '150px' }}>
+      <Box ref={buttonRef} sx={{ mt: 3, position: "relative", marginLeft: "150px" }}>
         <Box
           className="animate-slide-left"
           sx={{
-            width: '150px',
-            height: '150px',
-            borderRadius: '50%',
-            border: '1px solid rgba(255, 255, 255, 0.3)',
-            background: 'rgba(255, 255, 255, 0.05)',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            position: 'relative',
-            cursor: 'pointer',
-            textAlign: 'center',
-            transition: 'background 0.3s ease',
-            '&:hover': {
-              background: 'rgba(255, 255, 255, 0.2)',
+            width: "150px",
+            height: "150px",
+            borderRadius: "50%",
+            border: "1px solid rgba(255, 255, 255, 0.3)",
+            background: "rgba(255, 255, 255, 0.05)",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            position: "relative",
+            cursor: "pointer",
+            textAlign: "center",
+            transition: "background 0.3s ease",
+            "&:hover": {
+              background: "rgba(255, 255, 255, 0.2)",
             },
           }}
         >
           <Typography
             sx={{
-              color: 'rgba(255, 255, 255, 0.8)',
-              fontSize: '0.9rem',
+              color: "rgba(255, 255, 255, 0.8)",
+              fontSize: "0.9rem",
               fontWeight: 500,
-              textAlign: 'center',
-              textTransform: 'uppercase',
+              textAlign: "center",
+              textTransform: "uppercase",
             }}
           >
             EXPLORE OUR <br /> SERVICES
-            <ArrowOutwardTwoToneIcon sx={{ fontSize: 18, color: 'rgba(255, 255, 255, 0.8)', ml: '20px' }} />
+            <ArrowOutwardTwoToneIcon sx={{ fontSize: 18, color: "rgba(255, 255, 255, 0.8)", ml: "20px" }} />
           </Typography>
         </Box>
       </Box>
@@ -132,38 +129,39 @@ const HeroSection: React.FC = () => {
     }
     if (badgeRef.current) {
       gsap.fromTo(badgeRef.current, { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 1, delay: 0.5 });
-     
+
       const rotateBadge = gsap.to(badgeRef.current, {
         rotation: 360,
         duration: 10,
         repeat: -1,
         ease: "linear",
       });
-      return () => rotateBadge.kill();
+      return () => {
+        rotateBadge.kill(); // Fixed: No return value from kill()
+      };
     }
     if (buttonRef.current) {
       gsap.fromTo(buttonRef.current, { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 1, delay: 0.7 });
     }
   }, []);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          const element = entry.target.querySelector('.animate-slide-right');
+          const element = entry.target.querySelector(".animate-slide-right");
           if (element) {
             if (entry.isIntersecting) {
-      
-              element.classList.remove('disappear');
-              element.classList.add('appear');
+              element.classList.remove("disappear");
+              element.classList.add("appear");
             } else {
-             
-              element.classList.remove('appear');
-              element.classList.add('disappear');
+              element.classList.remove("appear");
+              element.classList.add("disappear");
             }
           }
         });
       },
-      { threshold: 0.5 } 
+      { threshold: 0.5 }
     );
 
     if (buttonRef.current) {
@@ -176,6 +174,7 @@ const HeroSection: React.FC = () => {
       }
     };
   }, []);
+
   return (
     <Box
       sx={{
@@ -186,7 +185,6 @@ const HeroSection: React.FC = () => {
         alignItems: "center",
         padding: "5rem 0",
         position: "relative",
-        // backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 20px, rgba(255, 255, 255, 0.05) 20px, rgba(255, 255, 255, 0.05) 40px)", // Grid pattern
       }}
     >
       <Container>
@@ -200,43 +198,42 @@ const HeroSection: React.FC = () => {
               lineHeight: "1",
               textTransform: "uppercase",
               letterSpacing: "0.1rem",
-              marginBottom: "1rem", 
+              marginBottom: "1rem",
             }}
           >
             Driving Results <br />
-            with{' '}
+            with{" "}
             <Typography
               component="span"
               sx={{
                 fontStyle: "italic",
                 textDecoration: "underline",
                 color: "#B0B0B0",
-                fontSize: "4rem", 
+                fontSize: "4rem",
               }}
             >
               Creative Digital
-            </Typography>{' '}<br />
+            </Typography>{" "}
+            <br />
             Solutions
           </Typography>
           <Typography
             sx={{
               mt: 2,
               maxWidth: "500px",
-              marginLeft: "0", 
+              marginLeft: "0",
               opacity: 0.8,
               fontSize: "1rem",
               lineHeight: "1.5",
-              marginBottom: "3rem", 
+              marginBottom: "3rem",
             }}
           >
             Our team of experts is dedicated to helping you achieve your digital goals. From website design and development to SEO, PPC advertising, and social media marketing.
           </Typography>
-         
-        <AnimatedButton />
-        
+          <AnimatedButton />
         </Box>
       </Container>
-     
+
       <Box
         ref={badgeRef}
         sx={{
@@ -279,22 +276,11 @@ const HeroSection: React.FC = () => {
                 fill="none"
               />
             </defs>
-            <text
-              fill="#B0B0B0"
-              fontSize="10"
-              fontFamily="Arial, sans-serif"
-              textAnchor="middle"
-            >
-              <textPath
-                href="#circlePath"
-                startOffset="25%"
-              >
+            <text fill="#B0B0B0" fontSize="10" fontFamily="Arial, sans-serif" textAnchor="middle">
+              <textPath href="#circlePath" startOffset="25%">
                 PROJECT SHOWCASE
               </textPath>
-              <textPath
-                href="#circlePath"
-                startOffset="75%"
-              >
+              <textPath href="#circlePath" startOffset="75%">
                 PROJECT SHOWCASE
               </textPath>
             </text>
@@ -334,7 +320,8 @@ const HeroSection: React.FC = () => {
           borderRadius: "50%",
           background: "linear-gradient(45deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%)",
           opacity: 0.5,
-          backgroundImage: "repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255, 255, 255, 0.05) 10px, rgba(255, 255, 255, 0.05) 20px)",
+          backgroundImage:
+            "repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255, 255, 255, 0.05) 10px, rgba(255, 255, 255, 0.05) 20px)",
         }}
       />
     </Box>
@@ -350,18 +337,18 @@ const ImageSection: React.FC = () => {
         imageRef.current,
         {
           opacity: 0,
-          x: "100%", 
-          ease: "power3.out", 
+          x: "100%",
+          ease: "power3.out",
         },
         {
           opacity: 1,
-          x: 0, 
-          duration: 1.5, 
+          x: 0,
+          duration: 1.5,
           scrollTrigger: {
             trigger: imageRef.current,
-            start: "top 80%", 
-            end: "top 20%", 
-            toggleActions: "play none none reverse", 
+            start: "top 80%",
+            end: "top 20%",
+            toggleActions: "play none none reverse",
           },
         }
       );
@@ -378,16 +365,11 @@ const ImageSection: React.FC = () => {
         marginTop: "-40px",
       }}
     >
-      <img
-        ref={imageRef}
-        src={image01}
-        width="100%"
-        alt="Section Image"
-        style={{ display: "block" }}
-      />
+      <img ref={imageRef} src={image01} width="100%" alt="Section Image" style={{ display: "block" }} />
     </Box>
   );
 };
+
 const TextScrollingSection: React.FC = () => {
   const textRef = useRef<HTMLDivElement | null>(null);
 
@@ -398,9 +380,9 @@ const TextScrollingSection: React.FC = () => {
         ease: "none",
         scrollTrigger: {
           trigger: textRef.current,
-          start: "top bottom", // Start when the top of the section is at the bottom of viewport
-          end: "bottom top", // End when the bottom of section is at the top of viewport
-          scrub: 1, // Smooth transition
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 1,
         },
       });
     }
@@ -430,22 +412,20 @@ const TextScrollingSection: React.FC = () => {
           lineHeight: "1.2",
           display: "inline-block",
           position: "relative",
-          transform: "translateX(-30%)", // Start from the left side
+          transform: "translateX(-30%)",
         }}
       >
         <Typography component="span" sx={{ display: "inline" }}>
           SS
         </Typography>
-        <Typography
-          component="span"
-          sx={{ display: "inline", ml: 2, fontSize: "120px", color: "black" }}
-        >
+        <Typography component="span" sx={{ display: "inline", ml: 2, fontSize: "120px", color: "black" }}>
           DIGITAL AGENCY SOLUTIONS
         </Typography>
       </Box>
     </Box>
   );
 };
+
 const styles = `
   @keyframes popUp {
     0% {
@@ -466,6 +446,7 @@ const styles = `
     animation: popUp 4s ease-out forwards; /* Trigger animation when visible */
   }
 `;
+
 const AboutSection: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement | null>(null);
 
@@ -474,12 +455,12 @@ const AboutSection: React.FC = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            const elements = entry.target.querySelectorAll('.animate-pop-up');
-            elements.forEach((el) => el.classList.add('visible'));
+            const elements = entry.target.querySelectorAll(".animate-pop-up");
+            elements.forEach((el) => el.classList.add("visible"));
           }
         });
       },
-      { threshold: 0.2 } 
+      { threshold: 0.2 }
     );
 
     if (sectionRef.current) {
@@ -495,60 +476,41 @@ const AboutSection: React.FC = () => {
 
   return (
     <>
-      
       <style>{styles}</style>
 
-      <Box
-        ref={sectionRef}
-        sx={{ py: 5, background: '#fff', position: 'relative' }}
-      >
+      <Box ref={sectionRef} sx={{ py: 5, background: "#fff", position: "relative" }}>
         <Container>
           <Grid container spacing={3} alignItems="center">
-          
-            <Grid item xs={12} md={6} sx={{ overflow: 'hidden', position: 'relative' }}>
+            <Grid item xs={12} md={6} sx={{ overflow: "hidden", position: "relative" }}>
               <Box className="image-collage">
-                <img
-                  src={teamImage} 
-                  width={500}
-                  alt="Team member 1"
-                  className="collage-image top-left"
-                />
+                <img src={teamImage} width={500} alt="Team member 1" className="collage-image top-left" />
               </Box>
             </Grid>
 
-           
-            <Grid item xs={12} md={6} sx={{ color: '#000' }}>
-              <Typography
-                variant="h4"
-                className="animate-pop-up"
-                sx={{ fontWeight: 'bold' }}
-              >
+            <Grid item xs={12} md={6} sx={{ color: "#000" }}>
+              <Typography variant="h4" className="animate-pop-up" sx={{ fontWeight: "bold" }}>
                 INNOVATIVE SOLUTIONS FOR YOUR BUSINESS
               </Typography>
-              <Typography
-                className="animate-pop-up"
-                sx={{ mt: 2, opacity: 0.8, color: '#666' }}
-              >
+              <Typography className="animate-pop-up" sx={{ mt: 2, opacity: 0.8, color: "#666" }}>
                 Founded in 2012, we have built a reputation for excellence and innovation in the digital marketing space. We pride ourselves on our client-centric approach, partnering with businesses of all sizes and industries to develop customized strategies that meet their unique needs and goals.
               </Typography>
               <Box sx={{ mt: 4 }}>
-              
                 <LinearProgress
                   variant="determinate"
                   value={90}
                   sx={{
                     height: 10,
                     borderRadius: 5,
-                    backgroundColor: '#e0e0e0',
-                    '& .MuiLinearProgress-bar': { backgroundColor: '#000' },
+                    backgroundColor: "#e0e0e0",
+                    "& .MuiLinearProgress-bar": { backgroundColor: "#000" },
                   }}
                 />
                 <Box
                   sx={{
-                    display: 'flex',
-                    alignItems: 'center',
+                    display: "flex",
+                    alignItems: "center",
                     mb: 2,
-                    justifyContent: 'space-between',
+                    justifyContent: "space-between",
                     mt: 1,
                   }}
                 >
@@ -566,15 +528,15 @@ const AboutSection: React.FC = () => {
                   sx={{
                     height: 10,
                     borderRadius: 5,
-                    backgroundColor: '#e0e0e0',
-                    '& .MuiLinearProgress-bar': { backgroundColor: '#000' },
+                    backgroundColor: "#e0e0e0",
+                    "& .MuiLinearProgress-bar": { backgroundColor: "#000" },
                   }}
                 />
                 <Box
                   sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
                     mt: 1,
                   }}
                 >
@@ -589,13 +551,13 @@ const AboutSection: React.FC = () => {
             </Grid>
           </Grid>
 
-         
           <Box className="decorative-elements" />
         </Container>
       </Box>
     </>
   );
 };
+
 const StrategySection: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement | null>(null);
 
@@ -604,12 +566,12 @@ const StrategySection: React.FC = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            const elements = entry.target.querySelectorAll('.animate-pop-up');
-            elements.forEach((el) => el.classList.add('visible'));
+            const elements = entry.target.querySelectorAll(".animate-pop-up");
+            elements.forEach((el) => el.classList.add("visible"));
           }
         });
       },
-      { threshold: 0.2 } 
+      { threshold: 0.2 }
     );
 
     if (sectionRef.current) {
@@ -625,59 +587,55 @@ const StrategySection: React.FC = () => {
 
   return (
     <>
-
       <style>{styles}</style>
 
       <Box
         ref={sectionRef}
         sx={{
           py: 5,
-          background: '#111',
-          color: '#fff',
-          textAlign: 'left',
-          position: 'relative',
-          minHeight: '100vh',
+          background: "#111",
+          color: "#fff",
+          textAlign: "left",
+          position: "relative",
+          minHeight: "100vh",
         }}
       >
-        <Container sx={{ display: 'flex', alignItems: 'center' }}>
-          <Box sx={{ margin: '0 30px' }}>
-            
+        <Container sx={{ display: "flex", alignItems: "center" }}>
+          <Box sx={{ margin: "0 30px" }}>
             <Typography
               className="animate-pop-up"
               sx={{
                 mb: 2,
-                fontSize: '0.875rem',
+                fontSize: "0.875rem",
                 opacity: 0.6,
-                textTransform: 'uppercase',
+                textTransform: "uppercase",
                 letterSpacing: 1,
               }}
             >
               Our Approach
             </Typography>
 
-       
             <Typography
               variant="h2"
               className="animate-pop-up"
               sx={{
                 mb: 2,
                 fontWeight: 700,
-                fontSize: '3.5rem',
+                fontSize: "3.5rem",
                 lineHeight: 1,
-                textTransform: 'uppercase',
+                textTransform: "uppercase",
                 letterSpacing: -1,
               }}
             >
               EXPERTISE IN STRATEGY, DESIGN AND DEVELOPMENT
             </Typography>
 
-          
             <Typography
               className="animate-pop-up"
               sx={{
                 mb: 4,
-                maxWidth: '500px',
-                fontSize: '1rem',
+                maxWidth: "500px",
+                fontSize: "1rem",
                 lineHeight: 1.6,
                 opacity: 0.7,
               }}
@@ -685,19 +643,19 @@ const StrategySection: React.FC = () => {
               The digital agency work process may vary depending on the specific project and client needs, but typically follows these basic steps. It is a collaborative and iterative process.
             </Typography>
 
-            <Box sx={{ textAlign: 'center' }}>
+            <Box sx={{ textAlign: "center" }}>
               <Button
                 variant="text"
                 className="animate-pop-up"
                 sx={{
-                  color: '#fff',
-                  textTransform: 'uppercase',
+                  color: "#fff",
+                  textTransform: "uppercase",
                   fontWeight: 700,
-                  fontSize: '1rem',
+                  fontSize: "1rem",
                   padding: 0,
-                  '&:hover': { background: 'transparent' },
-                  display: 'flex',
-                  alignItems: 'center',
+                  "&:hover": { background: "transparent" },
+                  display: "flex",
+                  alignItems: "center",
                 }}
               >
                 <Typography component="span" sx={{ mr: 2, letterSpacing: 1 }}>
@@ -707,153 +665,141 @@ const StrategySection: React.FC = () => {
                   sx={{
                     width: 100,
                     height: 100,
-                    borderRadius: '50%',
-                    border: '2px solid #fff',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
+                    borderRadius: "50%",
+                    border: "2px solid #fff",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
                   }}
                 >
-                  <ArrowOutwardTwoToneIcon sx={{ fontSize: 30, color: '#fff' }} />
+                  <ArrowOutwardTwoToneIcon sx={{ fontSize: 30, color: "#fff" }} />
                 </Box>
               </Button>
             </Box>
           </Box>
 
-        
           <div>
-          
             <Box
               sx={{
-                background: 'rgba(255, 255, 255, 0.1)',
+                background: "rgba(255, 255, 255, 0.1)",
                 padding: 2,
                 borderRadius: 8,
-                position: 'relative',
-                overflow: 'hidden',
+                position: "relative",
+                overflow: "hidden",
               }}
             >
               <Box
                 component="img"
-                src={image01} 
+                src={image01}
                 sx={{
-                  position: 'absolute',
+                  position: "absolute",
                   top: 0,
                   left: 0,
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
                   opacity: 0.3,
                   zIndex: 1,
                 }}
               />
-              <Box sx={{ position: 'relative', zIndex: 2 }}>
+              <Box sx={{ position: "relative", zIndex: 2 }}>
                 <Typography
                   variant="h5"
                   className="animate-pop-up"
                   sx={{
                     fontWeight: 700,
-                    fontSize: '1.5rem',
+                    fontSize: "1.5rem",
                     mb: 1,
-                    display: 'flex',
-                    alignItems: 'center',
+                    display: "flex",
+                    alignItems: "center",
                     gap: 1,
-                    color: '#fff',
+                    color: "#fff",
                   }}
                 >
                   DISCOVERY <span style={{ opacity: 0.5 }}>→</span>
                 </Typography>
                 <Typography
                   sx={{
-                    fontSize: '2rem',
+                    fontSize: "2rem",
                     fontWeight: 300,
-                    color: '#fff',
+                    color: "#fff",
                     opacity: 0.3,
-                    position: 'absolute',
+                    position: "absolute",
                     top: 10,
                     right: 10,
                   }}
                 >
                   01
                 </Typography>
-                <Typography
-                  className="animate-pop-up"
-                  sx={{ opacity: 0.8, fontSize: '0.875rem', mt: 2 }}
-                >
+                <Typography className="animate-pop-up" sx={{ opacity: 0.8, fontSize: "0.875rem", mt: 2 }}>
                   Based on the information gathered during discovery, the agency will develop a customized audience.
                 </Typography>
               </Box>
             </Box>
             <Box
               sx={{
-                background: 'rgba(255, 255, 255, 0.1)',
+                background: "rgba(255, 255, 255, 0.1)",
                 padding: 2,
                 borderRadius: 8,
-                position: 'relative',
+                position: "relative",
                 mt: 2,
               }}
             >
               <Typography
                 variant="h5"
                 className="animate-pop-up"
-                sx={{ fontWeight: 700, fontSize: '1.5rem', mb: 1, color: '#fff' }}
+                sx={{ fontWeight: 700, fontSize: "1.5rem", mb: 1, color: "#fff" }}
               >
                 STRATEGY
               </Typography>
               <Typography
                 sx={{
-                  fontSize: '2rem',
+                  fontSize: "2rem",
                   fontWeight: 300,
-                  color: '#fff',
+                  color: "#fff",
                   opacity: 0.3,
-                  position: 'absolute',
+                  position: "absolute",
                   top: 10,
                   right: 10,
                 }}
               >
                 02
               </Typography>
-              <Typography
-                className="animate-pop-up"
-                sx={{ opacity: 0.8, fontSize: '0.875rem', mt: 2 }}
-              >
+              <Typography className="animate-pop-up" sx={{ opacity: 0.8, fontSize: "0.875rem", mt: 2 }}>
                 Based on the information gathered during discovery, the agency will develop a customized audience.
               </Typography>
             </Box>
 
-          
             <Box
               sx={{
-                background: 'rgba(255, 255, 255, 0.1)',
+                background: "rgba(255, 255, 255, 0.1)",
                 padding: 2,
                 borderRadius: 8,
-                position: 'relative',
+                position: "relative",
                 mt: 2,
               }}
             >
               <Typography
                 variant="h5"
                 className="animate-pop-up"
-                sx={{ fontWeight: 700, fontSize: '1.5rem', mb: 1, color: '#fff' }}
+                sx={{ fontWeight: 700, fontSize: "1.5rem", mb: 1, color: "#fff" }}
               >
                 DEVELOPMENT
               </Typography>
               <Typography
                 sx={{
-                  fontSize: '2rem',
+                  fontSize: "2rem",
                   fontWeight: 300,
-                  color: '#fff',
+                  color: "#fff",
                   opacity: 0.3,
-                  position: 'absolute',
+                  position: "absolute",
                   top: 10,
                   right: 10,
                 }}
               >
                 03
               </Typography>
-              <Typography
-                className="animate-pop-up"
-                sx={{ opacity: 0.8, fontSize: '0.875rem', mt: 2 }}
-              >
+              <Typography className="animate-pop-up" sx={{ opacity: 0.8, fontSize: "0.875rem", mt: 2 }}>
                 Based on the information gathered during discovery, the agency will develop a customized audience.
               </Typography>
             </Box>
